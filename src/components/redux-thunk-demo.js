@@ -5,6 +5,10 @@ import { bindActionCreators } from 'redux';
 import * as blogActionCreator from '../store/blog/actions';
 import * as userActionCreator from '../store/user/actions';
 
+import cssImg from '../assets/images/aws.png';
+require('../assets/styles/main.scss');
+
+
 
 class demo extends React.Component {
 
@@ -18,6 +22,8 @@ class demo extends React.Component {
 
     render() {
         return <div>
+            <h3 className='main-title'>title</h3>
+            <img src={cssImg}></img>
             {
                 this.props.login.map(item => {
                     return <div key={item.name}>
