@@ -1,16 +1,27 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { bindActionCreators } from 'redux';
-import * as blogActionCreator from '../store/blog/actions';
-import * as userActionCreator from '../store/user/actions';
+import { asyncHotsList, asyncUpdateBlogList } from '../store/blog/actions';
+import { asyncLogin } from '../store/user/actions';
+import * as awsImg from '../assets/images/aws.png'
 
-import cssImg from '../assets/images/aws.png';
 require('../assets/styles/main.scss');
 
 
+export interface DemoProps {
+    blogList: Array<any>;
+    login: Array<any>;
+    hots: Array<any>;
+    blogFetchActions: any;
+    userFetchActions: any;
+}
 
-class demo extends React.Component {
+// 'DemoProps' describes the shape of props.
+// State is never set so we use the '{}' type.
+
+class demo extends React.Component<DemoProps, {}>{
 
     componentDidMount() {
         console.log('mounted.....>', this.props.blogList)
@@ -23,7 +34,7 @@ class demo extends React.Component {
     render() {
         return <div>
             <h3 className='main-title'>title</h3>
-            <img src={cssImg}></img>
+            <img src={awsImg}></img>
             {
                 this.props.login.map(item => {
                     return <div key={item.name}>
@@ -49,7 +60,7 @@ class demo extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
     console.log('state....>', state)
     return {
         blogList: state.blogList,
@@ -58,10 +69,10 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch) {
     return {
-        blogFetchActions: bindActionCreators(blogActionCreator, dispatch),
-        userFetchActions: bindActionCreators(userActionCreator, dispatch)
+        blogFetchActions: bindActionCreators({ asyncHotsList, asyncUpdateBlogList }, dispatch),
+        userFetchActions: bindActionCreators({ asyncLogin }, dispatch)
     }
 }
 
