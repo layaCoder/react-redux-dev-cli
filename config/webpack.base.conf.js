@@ -8,13 +8,15 @@ const postcss = require('postcss-loader');
 module.exports = {
   // 入口起点
   entry: {
-    app: './src/main.js',
+    app: './src/main.tsx',
   },
   // 输出
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: "[name].js",
   },
+
+  devtool: 'source-map',
   // 解析
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
@@ -22,6 +24,8 @@ module.exports = {
   // loader
   module: {
     rules: [
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.js|jsx$/,
         exclude: /(node_modules|bower_components)/,// 屏蔽不需要处理的文件（文件夹）（可选）

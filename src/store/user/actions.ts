@@ -3,15 +3,15 @@ import apiuser from '../../api/user'
 export const LOGIN = 'LOGIN'
 
 // redux store action
-function login(user) {
+function login(user:any) {
     return {
         type: LOGIN,
         payload:{user}
     }
 }
 
-export function asyncLogin(name, pass) {
-    return (dispatch, getState) => {
+export function asyncLogin(name:string, pass:string) {
+    return (dispatch:any, getState:any) => {
         let geturl =
             apiuser.login.url
                 .replace('{name}', name)

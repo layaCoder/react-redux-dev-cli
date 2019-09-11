@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import reducer from './store/index';
 import TestComp from './components/redux-thunk-demo';

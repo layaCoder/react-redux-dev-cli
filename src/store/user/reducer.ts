@@ -5,7 +5,7 @@ let loginState = [{
     name: ''
 }]
 
-function login(state = loginState, action) {
+function login(state = loginState, action:any) {
     switch (action.type) {
         case LOGIN:
             return action.payload.user

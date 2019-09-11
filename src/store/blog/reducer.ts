@@ -11,7 +11,7 @@ let initalHots = [{
     name: 'hots'
 }]
 
-function blogList(state = initalBlogList, action) {
+function blogList(state = initalBlogList, action:any) {
     switch (action.type) {
         case UPDATE_BLOG_LIST:
             return action.payload.blogList;
@@ -20,7 +20,7 @@ function blogList(state = initalBlogList, action) {
     }
 }
 
-function hots(state = initalHots, action) {
+function hots(state = initalHots, action:any) {
     switch (action.type) {
         case UPDATE_HOTS:
             return action.payload.hotsList;

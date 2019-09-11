@@ -1,17 +1,17 @@
 import axios from 'axios';
-import apiblog from '../../api/blog'
+import apiblog  from '../../api/blog';
 export const UPDATE_BLOG_LIST = 'UPDATE_BLOG_LIST'
 export const UPDATE_HOTS = 'UPDATE_HOTS'
 
 // redux store acton
-function updateBlogList(blogList) {
+function updateBlogList(blogList:Array<object>) {
     return {
         type: UPDATE_BLOG_LIST,
         payload: {blogList}
     }
 }
 
-function hots(hotsList) {
+function hots(hotsList:Array<object>) {
     return {
         type: UPDATE_HOTS,
         payload:{hotsList}
@@ -20,11 +20,11 @@ function hots(hotsList) {
 
 // redux-thunk middleware async function
 export function asyncUpdateBlogList() {
-    return (dispatch, getState) => {
+    return (dispatch:any, getState:any) => {
         let geturl =
             apiblog.getBlogList.url
-                .replace('{pageIndex}', 1)
-                .replace('{pageSize}', 10)
+                .replace('{pageIndex}', '1')
+                .replace('{pageSize}', '10')
         axios.get(geturl)
             .then(res => {
                 dispatch(updateBlogList(res.data));
@@ -36,7 +36,7 @@ export function asyncUpdateBlogList() {
 }
 
 export function asyncHotsList() {
-    return (dispatch, getState) => {
+    return (dispatch:any, getState:any) => {
         let geturl = apiblog.getHots.url
         axios.get(geturl)
             .then(res => {
