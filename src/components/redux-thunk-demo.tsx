@@ -5,23 +5,33 @@ import { Dispatch } from 'redux';
 import { bindActionCreators } from 'redux';
 import { asyncHotsList, asyncUpdateBlogList } from '../store/blog/actions';
 import { asyncLogin } from '../store/user/actions';
-import * as awsImg from '../assets/images/aws.png'
-
+import * as awsImg from '../assets/images/aws.png';
+import { blogItem, hotsItem } from '../store/blog/modle';
+import { User } from '../store/user/modle';
 require('../assets/styles/main.scss');
 
-
-export interface DemoProps {
-    blogList: Array<any>;
-    login: Array<any>;
-    hots: Array<any>;
+interface compProps {
+    blogList: Array<blogItem>;
+    hots: Array<hotsItem>;
+    login: User;
     blogFetchActions: any;
     userFetchActions: any;
 }
+interface compState {
+    count: number,
+}
 
 // 'DemoProps' describes the shape of props.
-// State is never set so we use the '{}' type.
+// if State is never set , we will use the '{}' type instead of compState.
 
-class demo extends React.Component<DemoProps, {}>{
+class demo extends React.Component<compProps, compState>{
+
+    constructor(props: compProps) {
+        super(props);
+        this.state = {
+            count: 0,
+        }
+    }
 
     componentDidMount() {
         console.log('mounted.....>', this.props.blogList)
@@ -31,16 +41,33 @@ class demo extends React.Component<DemoProps, {}>{
         this.props.userFetchActions.asyncLogin('Jason', '******')
     }
 
+    renderUserState() {
+        return <div>
+            <p>
+                login?  {this.props.login.login ? 'true' : 'false'}
+            </p>
+            <p>
+                {this.props.login._id}
+            </p>
+            <p>
+                {this.props.login.name}
+            </p>
+            <p>
+                {this.props.login.avatarUrl}
+            </p>
+        </div>
+    }
+
     render() {
+        const showUserState = this.props.login.login ? 'block' : 'none';
+
         return <div>
             <h3 className='main-title'>title</h3>
             <img src={awsImg}></img>
             {
-                this.props.login.map(item => {
-                    return <div key={item.name}>
-                        {item.name}
-                    </div>
-                })
+                <div style={{ display: showUserState }}>
+                    {this.renderUserState()}
+                </div>
             }
             {
                 this.props.blogList.map(item => {

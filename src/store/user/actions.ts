@@ -2,6 +2,7 @@ import axios from 'axios'
 import apiuser from '../../api/user'
 export const LOGIN = 'LOGIN'
 
+
 // redux store action
 function login(user:any) {
     return {
@@ -22,7 +23,7 @@ export function asyncLogin(name:string, pass:string) {
                     dispatch(login(res.data))
                 }
                 else {
-                    dispatch(login([]))
+                    return
                 }
             })
             .catch(err => {

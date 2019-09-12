@@ -1,16 +1,24 @@
 import { LOGIN } from './actions'
+import { User } from './modle'
 
-let loginState = [{
-    login: false,
-    name: ''
-}]
 
-function login(state = loginState, action:any) {
+function login(state = new User(), action: any): User {
     switch (action.type) {
         case LOGIN:
-            return action.payload.user
+            if (action.payload.user
+                && action.payload.user instanceof Array
+                && action.payload.user.length > 0) {
+                let loginUser = new User(
+                    action.payload.user[0]._id,
+                    true,
+                    action.payload.user[0].name,
+                    action.payload.user[0].avatarUrl
+                );
+                return loginUser
+            }
         default:
             return state
     }
 }
+
 export default { login }
