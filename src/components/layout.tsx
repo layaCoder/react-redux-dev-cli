@@ -8,6 +8,11 @@ import { asyncLogin } from '../store/user/actions';
 import * as awsImg from '../assets/images/aws.png';
 import { blogItem, hotsItem } from '../store/blog/modle';
 import { User } from '../store/user/modle';
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Home from './home'
+import UserCoponent from './user'
+
+
 require('../assets/styles/main.scss');
 
 interface compProps {
@@ -16,6 +21,7 @@ interface compProps {
     login: User;
     blogFetchActions: any;
     userFetchActions: any;
+    history?: any;
 }
 interface compState {
     count: number,
@@ -26,11 +32,13 @@ interface compState {
 
 class demo extends React.Component<compProps, compState>{
 
-    constructor(props: compProps) {
+    constructor(props: any) {
         super(props);
         this.state = {
             count: 0,
         }
+        this.btnToHome = this.btnToHome.bind(this)
+        this.btnToUser = this.btnToUser.bind(this)
     }
 
     componentDidMount() {
@@ -43,20 +51,21 @@ class demo extends React.Component<compProps, compState>{
 
     renderUserState() {
         return <div>
-            <p>
-                login?  {this.props.login.login ? 'true' : 'false'}
-            </p>
-            <p>
-                {this.props.login._id}
-            </p>
-            <p>
-                {this.props.login.name}
-            </p>
-            <p>
-                {this.props.login.avatarUrl}
-            </p>
+            <p>login?  {this.props.login.login ? 'true' : 'false'}</p>
+            <p>{this.props.login._id}</p>
+            <p>{this.props.login.name}</p>
+            <p>{this.props.login.avatarUrl}</p>
         </div>
     }
+
+    btnToHome(): void {
+        this.props.history.push('/layout/home')
+    }
+
+    btnToUser(): void {
+        this.props.history.push('/layout/user')
+    }
+
 
     render() {
         const showUserState = this.props.login.login ? 'block' : 'none';
@@ -83,12 +92,19 @@ class demo extends React.Component<compProps, compState>{
                     </div>
                 })
             }
+            <div>
+                <button onClick={this.btnToHome}>ToHome</button>
+                <button onClick={this.btnToUser}>ToUser</button>
+            </div>
+            <h2>Child Route</h2>
+            {/* <Route path='/layout/home' render={props => <Home {...props} />} /> */}
+            <Route path='/layout/home' component={Home} />
+            <Route path='/layout/user' component={UserCoponent}></Route>
         </div>
     }
 }
 
 function mapStateToProps(state: any) {
-    console.log('state....>', state)
     return {
         blogList: state.blogList,
         hots: state.hots,
@@ -102,5 +118,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
         userFetchActions: bindActionCreators({ asyncLogin }, dispatch)
     }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(demo);
