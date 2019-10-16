@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
+import Wizard from './wizard/view';
 
 
 
@@ -24,6 +25,7 @@ class home extends React.Component<{}, stateCheck>{
 
         return <div>
             <strong>{this.state.content}</strong>
+            <Wizard></Wizard>
         </div>
     }
 }

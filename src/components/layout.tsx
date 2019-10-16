@@ -78,13 +78,14 @@ class demo extends React.Component<compProps, compState>{
                     {this.renderUserState()}
                 </div>
             }
-            {
+            {/* get blog list id array */}
+            {/* {
                 this.props.blogList.map(item => {
                     return <div key={item._id}>
                         {item._id}
                     </div>
                 })
-            }
+            } */}
             {
                 this.props.hots.map(item => {
                     return <div key={item._id}>
@@ -98,13 +99,13 @@ class demo extends React.Component<compProps, compState>{
             </div>
             <h2>Child Route</h2>
             {/* <Route path='/layout/home' render={props => <Home {...props} />} /> */}
-            <Route path='/layout/home' component={Home} />
+            <Route path='/layout/home' component={Home}/>
             <Route path='/layout/user' component={UserCoponent}></Route>
         </div>
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state:any) {
     return {
         blogList: state.blogList,
         hots: state.hots,
