@@ -6,7 +6,7 @@ import WizardForm from './wizard-form';
 class Wizard extends Component {
 
     onSubmit = (values) => {
-        console.log('wizard form values...>', JSON.stringify(values));
+        console.log('wizard form values...>', values);
     }
     render() {
         return (

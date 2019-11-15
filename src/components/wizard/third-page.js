@@ -25,7 +25,18 @@ const WizardThirdPage = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="favoriteColor" label="Favorite Color" component={renderColorSelector}></Field>
+      <div>
+        <label>favoriteColor</label>
+        <Field name="favoriteColor" label="Favorite Color" component={renderColorSelector}></Field>
+      </div>
+      <div>
+        <label>Employed</label>
+        <Field name="employed" component="input" type="checkbox"></Field>
+      </div>
+      <div>
+        <label>Notes</label>
+        <Field name="notes" component="textarea"></Field>
+      </div>
       <button type="button" onClick={previousPage}>Previous</button>
       <button type="submit">Submit</button>
     </form>

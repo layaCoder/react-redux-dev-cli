@@ -11,7 +11,9 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 class App extends React.Component {
     render() {
-        const store = createStore(reducer, applyMiddleware(thunk));
+        const store = createStore(reducer, 
+            applyMiddleware(thunk)
+            );
         return <Provider store={store}>
             <Router>
                 <div>

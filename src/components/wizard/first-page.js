@@ -10,7 +10,7 @@ const WizardFormFirstPage = (props) => {
         <div>
             <form onSubmit={handleSubmit} >
                 <Field name="firstName" type="text" component={inputField} label="First Name"></Field>
-                <Field name="lastName" type="test" component="input"></Field>
+                <Field name="lastName" type="test" component={inputField} label="Last Name"></Field>
                 <button type="submit">Next</button>
             </form>
         </div>
